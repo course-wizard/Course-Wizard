@@ -28,11 +28,17 @@ class AddingReviewsViewController: UIViewController {
 
     func saveCourseReview(review: String, school: String, department: String, course: String ) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US")
+        let dateString = formatter.string(from: date)
         let reviews = Reviews(context:context)
         reviews.course = course
         reviews.school = school
         reviews.department = department
         reviews.reviews = review
+        reviews.date = dateString
+        
         
         try? context.save()
     }

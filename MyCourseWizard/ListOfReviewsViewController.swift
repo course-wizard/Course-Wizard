@@ -18,6 +18,7 @@ class ListOfReviewsViewController: UIViewController, UITableViewDataSource, UITa
     var selectedSchool = ""
     var selectedDepartment = ""
     var reviews: [String] = []
+    var dates: [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         listOfReviewsTableView.dataSource = self
@@ -42,6 +43,8 @@ class ListOfReviewsViewController: UIViewController, UITableViewDataSource, UITa
         if (reviews?.count)! > 0 {
             for index in 0...(reviews?.count)! - 1 {
                 self.reviews.append((reviews?[index].reviews!)!)
+                self.dates.append((reviews?[index].date!)!)
+                
                 
             }
         }
@@ -56,8 +59,9 @@ class ListOfReviewsViewController: UIViewController, UITableViewDataSource, UITa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellOfReviews", for: indexPath) as! ReviewTableViewCell
-        cell.nameLabel.text = "Anonymous"
+        cell.indexLabel.text = "\(indexPath.row + 1)"
         cell.reviewLabel.text = reviews[indexPath.row]
+        cell.dateLabel.text = dates[indexPath.row]
         return cell
     }
 
